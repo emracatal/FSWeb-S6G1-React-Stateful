@@ -35,8 +35,8 @@ ADIM 4:
   "not" için kullandığımız operatörü hatırlıyor musunuz??
 */
 
-import React, { useState } from "react"; /* STEP 0 */
-
+import React from "react"; /* STEP 0 */
+import { useState } from "react";
 export default function Dondurucu() {
   /* ADIM 1 */
   const [dondurucuAcik, setDondurucuAcik] = useState(true);
@@ -56,7 +56,7 @@ export default function Dondurucu() {
         ) /* ADIM 2 */
       }
       <button id="toggleDondurucu" onClick={toggleDondurucu}>
-        Gizle {/* STEP 3 */ dondurucuAcik ? "Gizle" : "Göster"}
+        {dondurucuAcik ? "gizle" : "göster" /* STEP 3 */}
       </button>
     </div>
   );
