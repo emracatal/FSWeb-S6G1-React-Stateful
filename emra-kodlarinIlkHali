@@ -1,0 +1,431 @@
+/*
+INPUT Talimatlar
+
+Şu kısa videoyu izleyin:
+https://www.ergineer.com/assets/materials/a664dfe7-input.gif
+
+Bu INPUT'u oluşturmak için kaç adet state dilimine ihtiyacınız var? Başlamadan önce biraz üzerine düşünün!
+
+Evet sadece bir dilim yeterli! İçeride inputun değerini sürekli izleyeceğiz.
+Metnin royalblue veya crimson olacağı, input değerinin uzunluğundan elde edilebilir.
+
+ADIM 0:
+  Aşağıdaki bileşeni inceleyerek ve state hookunu import ederek başlayın.
+
+ADIM 1:
+  'inputDeğeri' ve 'setInputDeğeri' ikili state hookunu oluşturun.
+  Bu state boş bir string olarak yüklenecektir(initialize).
+
+ADIM 2:
+  'inputDeğeri' uzunluğu 10 karakteri geçerse renk crimson olacaktır.
+
+ADIM 3:
+  Bu <div /> içindeki inputa değer girildiğinde hepsini BÜYÜK HARFLERDE göstermesini nasıl sağlayabiliriz?
+
+ADIM 4:
+  Event nesnesinin içinde bulunan state'e input'un değerini atayın
+
+ADIM 5:
+  Input değerinin state'ını boşaltın. Reset hala çalışmıyor bir sonraki adımı inceleyin.
+
+ADIM 6:
+  Inputun başarılı bir şekilde resetlemesi için değerini state'ten almalıdır!
+  <input /> öğesine şu şekilde fazladan bir prop eklememiz gerekiyor: value={inputDeğeri}
+*/
+
+import React from 'react'; /* ADIM 0 */
+
+export default function Input() {
+  /* ADIM 1 */
+	
+  const inputuDeğiştir = evt => {
+    // When the input changes, its whole value can be found inside the event object.
+    // Log out the synthetic event object 'evt' and see for yourself.
+    const { value } = evt.target;
+	
+    /* ADIM 4 */
+  };
+  const reset = () => {
+    /* ADIM 5 */
+  };
+
+  const stil = {
+    fontSize: '1.5em',
+    marginBottom: '0.3em',
+    color: 'crimson', /* ADIM 2 */
+  };
+
+  return (
+    <div className='widget-input container'>
+      <h2>Input</h2>
+      <div id='output' style={stil}></div> {/* ADIM 3 */}
+      <div>
+		<input id='input' type='text' onChange={inputuDeğiştir} /> {/* ADIM 6 */}
+        <button id='resetInput' onClick={reset}>Reset</button>
+      </div>
+    </div>
+  );
+}
+
+----------------------------------
+
+/*
+cursor: pointer;
+Talimaları
+
+Aşağıdaki kısa videoyu izleyin:
+https://www.ergineer.com/assets/materials/a664dfe7-kareler.gif
+
+Bu bileşen, bir yandan "kare idlerinin" listesinin kaydını tutar,
+ve şu anda aktif olan id yi tutar. Yani iki dilim kullanılacak!
+Biri kareleri oluşturmak için kullanılır, diğeri ise id yi tutmak için,
+böylece bileşen hangi karenin o anda aktif olduğunu bilir.
+
+Herhangi bir noktada yalnızca bir kare aktif olabilir (ya da hiçbiri)
+
+Aşaıdaki yorumları takip edin.
+*/
+
+import React from 'react';
+
+
+//Bu değişkeni YALNIZCA bir durum dilimini yüklemek için kullanın!
+const KareIdListesi = ['sqA', 'sqB', 'sqC', 'sqD'];
+
+
+
+export default function Kareler() {
+  // State hookunu 2 defa kullanın: 'kareler' ve
+  // 'aktifKare' olmak üzere. Birisi kare idlerini _dizi_ olarak tutacak, diğeri ise aktif olan
+  // kareyi gözlemleyecek. Sayfa yüklendiğinde aktif kare olmayacak,
+  // yani  'aktifKare' null olmalı.
+	
+  const ClassAdiAl = id => {
+    // Bu bir click handler değildir, JSX içinde kullanılan bir yardımcıdır(helper).(aşağıya bakın)
+    // Eğer argüman olarak verilen id aktif kare state'indeki id ile eşleşirse, class adı 'active' olan bir string döndürecek
+    // diğer durumlar için boş döndürecek.
+    // Etkisini görmek için kareye sağ tıklayın ve "öğeyi inceleyin".
+	return ''
+  };
+
+  const AktifEt = id => {
+    // Bu bir _satır içinden çağırılmış_ click handler yardımcısıdır.
+    // id bağımsız değişkenini, stateteki aktif id olacak şekilde ayarlayın
+    // eğer zaten aktifse, o zaman önce state i resetlemeliyiz.
+  };
+
+  return (
+    <div className='widget-squares container'>
+      <h2>Kareler</h2>
+      <div className='squares'>
+        {
+          // Kötü bug!  'KareIdListesi' yerine bir state dilimi kullanmalıyız.
+          // Şöyle diyebiliriz: "aa bu çalışıyor!" Ama kareler bir state diliminden gelmiyorsa,
+          // asla yeni kare ekleyemeyiz, kareleri düzenleyemeyiz ya da silemeyiz. Düzeltin!
+          KareIdListesi.map(id =>
+            <div
+              id={id}
+              key={id}
+              className={`square ${ClassAdiAl(id)}`}
+              onClick={() => AktifEt(id)}
+            >
+            </div>
+          )
+        }
+      </div>
+    </div>
+  );
+}
+
+----------------------------------
+/*
+Programcilar Talimatları
+
+Şu kısa videoyu izleyin:
+https://www.ergineer.com/assets/materials/a664dfe7-programcilar.gif
+
+Bu bileşen, bir yandan programlama alanındaki öncülerin bir listesini,
+ve diğer tarafta o anda öne çıkan programcının idsini izler. Yani 2 adet state dilimi!
+Aynı zaman içinde yalnız bir harika programcıyı öne çıkarabiliriz.
+
+Yorumları takip edin.
+*/
+
+import React from 'react';
+/* ADIM 0  */
+
+
+// Bu değişkeni YALNIZCA bir state dilimini başlatmak için kullanın!
+// JSX'te şu anda bu kuralı çiğneyen bir şey var...
+// Export syntaxı, test kitaplığının diziyi içe aktarabilmesi için gereklidir.
+export const enIyilerListesi = [
+  { id: '1', isim: 'Ada Lovelace' },
+  { id: '2', isim: 'Grace Hopper' },
+  { id: '3', isim: 'Evelyn Boyd Granville' },
+  { id: '4', isim: 'Mary Kenneth Keller' },
+  { id: '5', isim: 'Frances Allen' },
+  { id: '6', isim: 'Carol Shaw' },
+];
+
+export default function Programcilar() {
+  // İki state dilimine ihtiyacımız olduğundan, state hooku iki kez kullanmamız gerekecek..
+  // Bir yanda programcılar listesi, diğer yanda öne çıkan programcının idsi.
+
+	
+  const oneCikaninIsmi = () => {
+    // Bunu sona bırakın!
+    // Bu bir event handler değil, yardımcıdır. Kullanımını JSX'te gözlemleyin.
+    // Öne çıkan geliştiricinin _isim_ adını döndürmek için her iki state dilimini kullanacak.
+    // Closureların güzelliği, argümanlar yoluyla bilgi enjekte etmeye gerek kalmadan programın 
+	// bu bölgesinden her iki state dilimini de "görebilmemiz"dir.
+  };
+
+  const stil = {
+    fontSize: '1.5em',
+    marginTop: '0.5em',
+    color: 'royalblue', // 🤔 kutlarken renk gold'a dönecek
+  };
+
+  return (
+    <div className='widget-programmers container'>
+      <h2>Programcılar</h2>
+      <div className='programmers'>
+        {
+          /* Kötü bug! 'enIyilerListesi' yerine bir state dilimini maplemeliyiz.
+          // Şöyle diyebiliriz: "aa bu çalışıyor!" Ama programcilar bir state diliminden gelmiyorsa,
+          // asla yeni programci ekleyemeyiz, programcilari düzenleyemeyiz ya da silemeyiz. Düzeltin!
+          " */
+          enIyilerListesi.map(dev =>
+            <div className='programmer' key={dev.id}>
+              {dev.isim} <button onClick={() => {/* burada dev.id 'yi öne çıkan id'ye atayın */ }}>Kutla</button>
+            </div>
+          )
+        }
+      </div>
+      <div id='featured' style={stil}>
+        {
+          // Üçlüler, bir şeyin "gerçekliğine" bağlı olarak "bir şeyi veya diğerini" ifade etmek için harikadır..
+          // Sözde-kod: öne çıkan true ise metin 1'i oluşturun, aksi takdirde metin 2'yi oluşturun..
+          // Sabit kodlanmış false'u doğru değişkenle değiştirin.
+          false
+            ? `🎉 Hadi ${oneCikaninIsmi()}'ı kutlayalım! 🥳`
+            : 'Harika bir programcı seçin'
+        }
+      </div>
+    </div>
+  );
+}
+ 
+-----------------------------------
+/*
+Döndürücü Talimatlar
+
+Şu kısa videoyu izleyin:
+https://www.ergineer.com/assets/materials/a664dfe7-dondurucu.gif
+
+Bu Dondurucu'yü oluşturmak için kaç adet state dilimine ihtiyacınız var? Başlamadan önce biraz üzerine düşünün!
+
+İlk düşüncemize göre 2 state olması lazım:
+  - döndürücü görünür olduğunda veya değilken (bu belki boolean olabilir).
+  - Button'daki yazı "Döndürcüyü Göster" veya "Döndürücüyü Gizle" olduğunda.
+
+Fakat tek bir state dilimi yeterlidir, döndürücü.
+Metini bu state e göre yazdırabiliriz.
+
+ADIM 0:
+  Aşağıdaki bileşeni inceleyerek ve state hookunu import ederek başlayın.
+
+ADIM 1:
+  State hookunu kullanara, bir 'döndürücüAçık', 'setdöndürücüAcik' çifti oluşturun.
+  'döndürücüAçık' true olarak yüklendiğinde döndürücü görünür olacak.
+
+ADIM 2:
+  Bu mantıksal bir ifadedir. '&&'nin her iki yanındaki ifadeler true ise,
+  sağdaki değer tüm ifadenin değeri olur. '&&'nin her iki tarafında bir ifade varsa
+  ve false sa, soldaki tüm satırın değeri olur. 
+
+  Sabit yazılmış 'true' döndürücü açık veya kapalı durumuna göre değiştirin.
+
+ADIM 3:
+  'döndürücüAçık' değerine bağlı olarak "Gizle" veya "Göster" metni oluşturmak için button içinde bir ifade kullanın.
+
+ADIM 4:
+  Bu click handlerın, "açık olup olmadığını" şu anda olduğunun tersi olacak şekilde ayarlayarak döndürücüyü değiştirmesi gerekir.
+  "not" için kullandığımız operatörü hatırlıyor musunuz??
+*/
+
+import React from 'react'; /* STEP 0 */
+
+export default function Dondurucu() {
+/* ADIM 1 */
+
+  const toggleDondurucu = () => {
+  /* ADIM 4 */
+  };
+
+  return (
+    <div className='widget-spinner container'>
+      <h2>Döndürücü</h2>
+      {
+        true && <div id='döndürücü' className='spinner'>--+--</div> /* ADIM 2 */
+      }
+      <button id='toggleDondurucu' onClick={toggleDondurucu}>
+         Gizle {/* STEP 3 */}
+      </button>
+    </div>
+  );
+}
+
+----------------------------------
+
+/*
+RuhHalleri Talimatları
+
+Aşağıdaki kısa videoyu izleyin:
+https://www.ergineer.com/assets/materials/a664dfe7-ruhhalleri.gif
+
+Bu Sayacı oluşturmak için kaç adet state dilimine ihtiyacınız var? Başlamadan önce biraz üzerine düşünün!
+
+Bazıları 3 adet olduğunu söyleyecektir: her ruh hali için bir (mutlu, üzgün, ve bilinmeyen).
+Fakat tek bir state dilimi bu durumları saklamak için yeterlidir!
+
+ADIM 0:
+  Aşağıdaki bileşeni inceleyin ve state hook'u import edin.
+
+ADIM 1:
+  State hook'u kullanarak bir 'ruhHali' ve 'setRuhHali' oluşturun.
+  'ruhHali' state dilimi verilen 3 ruh halinden birisiyle yüklenecek.
+  Bu değişkenler zaten tanımlandı, bu uzun cümleleri bileşen içine tekrar yazmanıza gerek yok.
+
+ADIM 2:
+  Eğer state mutluysa rengi royalblue yapın, diğer durumlar için crimson yapın.
+
+ADIM 3:
+  JSX içinde sabit yazılmış ruh halini silip `ruhHali` state dilimine göre kıvrımlı parantezler içerisinde ekleyin.
+
+ADIM 4, 5, 6:
+  Click handler içinde `setRuhHali` ni kulanarak aşağıda tanımlanmış değişkenleri kullanarak ruhHali'ni güncelleyin
+*/
+
+import React from 'react'; /* ADIM 0 */
+
+const ilkRuhHali = 'Nasıl hissettiğimi bilmiyorum :-|';
+const mutluRuhHali = 'Oldukça mutlu :)';
+const uzgunRuhHali = 'Oldukça üzgün :(';
+
+export default function RuhHalleri() {
+  /* ADIM 1 */
+	
+	
+  const mutluEt = () => {
+    /* ADIM 4 */
+  };
+  const uZ = () => {
+    /* ADIM 5 */
+  };
+  const reset = () => {
+    /* ADIM 6 */
+  };
+
+  const stil = {
+    fontSize: '1.5em',
+    marginBottom: '0.3em',
+    color: 'royalblue', /* ADIM 2 */
+  };
+
+  return (
+    <div className='widget-moods container'>
+      <h2>RuhHalleri</h2>
+	<div id='ruhHali' style={stil}>'Nasıl hissettiğimi bilmiyorum :-|'</div> {/* ADIM 3 */}
+      <div>
+        <button id='mutluEt' onClick={mutluEt}>Mutlu Et</button>
+        <button id='uz' onClick={uZ}>Üz</button>
+        <button id='resetRuhHali' onClick={reset}>Reset</button>
+      </div>
+    </div>
+  );
+}
+
+----------------------------------
+/*
+SAYAÇ Talimatları
+
+Aşağıdaki kısa videoyu izleyin, UI ve Chrome Devtools'a dikkat edin:
+https://www.ergineer.com/assets/materials/a664dfe7-sayac.gif
+
+Bu Sayacı oluşturmak için kaç adet state dilimine ihtiyacınız var? Başlamadan önce biraz üzerine düşünün!
+
+Saf bir geliştirici 3 farklı state dilimi diyebilir:
+  - Sayıcı
+  - Metnin kırmızı mı yoksa mavi mi olduğu
+  - Metnin "çift" mi yoksa "tek" mi olduğu
+
+Ancak burada sadece bir state gereklidir: sayici!
+Diğer şeyler basitçe sayımın kendisinden türetilebilir.
+
+ADIM 0:
+  Aşağıdaki bileşeni inceleyerek ve state hookunu import ederek başlayın.
+
+ADIM 1:
+  State hookunu kullanara, bir 'sayici', 'setSayici' çifti oluşturun.
+  'sayici' state'inin ilk değeri 0 olarak yüklenmelidir.
+
+ADIM 2:
+  'stil' nesnesinde 'color' niteliği sabit olarak "royalblue" olarak belirlenmiştir.
+  Bunun yerine 'color' değerinin ne olması gerektiği, şu şekilde belirlenmelidir:
+  Eğer sayici çiftse "royalblue", değilse "crimson" olmalıdır.
+
+ADIM 3:
+  JSX'teki bazı sabit kodlanmış bilgileri, kıvrımlı parantezler ({}) içinde enterpolasyonlu ifadelerle değiştirmemiz gerekiyor.
+  Sabit olarak yazılmış "0" sayısını {sayici} değişkeni ile değiştirerek başlayın.
+  Sonra "çift" kelimesini şu kurala göre değiştirin: {eğer sayıcı çiftse, kelime `çift` değilse `tek` olacak}.
+
+ADIM 4:
+  Bu click handler'ın, "sayici" stateini artı bir yapacak şekilde programlamak için "setSayici"i kullanması gerekiyor.
+  Bu state değişiklikleri senkronize değil: güncellenen sayım, Sayac bileşeninin bir sonraki çalıştırmasında da gelir.
+  Sakın basitçe sayici++ yapmayın. Artı artı yasak! Bu tarz artırım bir sonraki çağırımda gelmez. Her zaman state'e yeni değer 
+  atamak için state güncelleyici kullanmalısınız.
+
+ADIM 5:
+  Bu click handler 'sayici' yi bir azaltmak için 'setSayici' ı kulanacak.
+  sayici-- SAKIN kullanmayın. Bu tarz kullanım bir sonraki çalıştırmada gelmez.
+
+ADIM 6:
+	Bu click handler 'sayici' yı sıfırlamak için 'setSayici' yi kullanacak.
+*/
+
+import React from 'react'; /* ADIM 0 buraya*/
+
+export default function Sayac() {
+  /* ADIM 1 buraya*/
+	
+	
+  const artirici = () => {
+    /* ADIM 4 buraya */
+  };
+  const azaltici = () => {
+    /* ADIM 5 */
+  };
+  const reset = () => {
+  };
+
+  const stil = {
+    fontSize: '1.5em',
+    marginBottom: '0.3em',
+    color: 'royalblue', /* ADIM 2 */
+  };
+
+  return (
+    <div className='widget-counter container'>
+      <h2>Sayaç</h2>
+      <div id='sayici' style={stil}>
+        Sayı {sayici} {/* ADIM 3  buraya*/ }
+      </div>
+      <div>
+        <button id='artirici' onClick={artirici}>Artırıcı</button>
+        <button id='decrement' onClick={azaltici}>Azaltıcı</button>
+        <button id='resetCount' onClick={reset}>Reset</button>
+      </div>
+    </div>
+  );
+}

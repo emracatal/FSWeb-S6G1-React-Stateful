@@ -39,7 +39,7 @@ import { useState } from "react";
 export default function Input() {
   /* ADIM 1 */
   const [inputDegeri, setInputDegeri] = useState("");
-  const inputuDeğiştir = (evt) => {
+  const inputuDegistir = (evt) => {
     // When the input changes, its whole value can be found inside the event object.
     // Log out the synthetic event object 'evt' and see for yourself.
     const { value } = evt.target;
@@ -68,8 +68,9 @@ export default function Input() {
         <input
           id="input"
           type="text"
-          onChange={inputuDeğiştir}
-          value={inputDegeri}
+          onChange={inputuDegistir}
+          cursor: pointer;
+
         />{" "}
         {/* ADIM 6 */}
         <button id="resetInput" onClick={reset}>

@@ -29042,7 +29042,7 @@ function Input() {
     _useState2 = _slicedToArray(_useState, 2),
     inputDegeri = _useState2[0],
     setInputDegeri = _useState2[1];
-  var inputuDeğiştir = function inputuDeğiştir(evt) {
+  var inputuDegistir = function inputuDegistir(evt) {
     // When the input changes, its whole value can be found inside the event object.
     // Log out the synthetic event object 'evt' and see for yourself.
     var value = evt.target.value;
@@ -29068,7 +29068,7 @@ function Input() {
   }, /* ADIM 3 */inputDegeri.toUpperCase()), " ", /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
     id: "input",
     type: "text",
-    onChange: inputuDeğiştir,
+    onChange: inputuDegistir,
     value: inputDegeri
   }), " ", /*#__PURE__*/_react.default.createElement("button", {
     id: "resetInput",
@@ -29296,7 +29296,7 @@ function Kareler() {
   // Kötü bug!  'KareIdListesi' yerine bir state dilimi kullanmalıyız.
   // Şöyle diyebiliriz: "aa bu çalışıyor!" Ama kareler bir state diliminden gelmiyorsa,
   // asla yeni kare ekleyemeyiz, kareleri düzenleyemeyiz ya da silemeyiz. Düzeltin!
-  KareIdListesi.map(function (id) {
+  kareler.map(function (id) {
     return /*#__PURE__*/_react.default.createElement("div", {
       id: id,
       key: id,
@@ -29400,6 +29400,7 @@ function Programcilar() {
     className: "programmers"
   },
   /* Kötü bug! 'enIyilerListesi' yerine bir state dilimini maplemeliyiz.
+  cursor: pointer;
   // Şöyle diyebiliriz: "aa bu çalışıyor!" Ama programcilar bir state diliminden gelmiyorsa,
   // asla yeni programci ekleyemeyiz, programcilari düzenleyemeyiz ya da silemeyiz. Düzeltin!
   " */
@@ -29463,7 +29464,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56500" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64160" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

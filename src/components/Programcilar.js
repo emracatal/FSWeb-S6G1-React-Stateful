@@ -57,6 +57,7 @@ export default function Programcilar() {
       <div className="programmers">
         {
           /* Kötü bug! 'enIyilerListesi' yerine bir state dilimini maplemeliyiz.
+    cursor: pointer;
           // Şöyle diyebiliriz: "aa bu çalışıyor!" Ama programcilar bir state diliminden gelmiyorsa,
           // asla yeni programci ekleyemeyiz, programcilari düzenleyemeyiz ya da silemeyiz. Düzeltin!
           " */
